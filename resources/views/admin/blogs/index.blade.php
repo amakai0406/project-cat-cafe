@@ -18,6 +18,7 @@
                         <th class="font-medium">カテゴリ</th>
                         <th class="font-medium">投稿者</th>
                         <th class="font-medium">更新日時</th>
+                        <th class="font-medium">作成日時</th>
                         <th class="font-medium">操作</th>
                     </tr>
                 </thead>
@@ -34,6 +35,7 @@
                             <td class="font-medium">{{ $blog->category->name }}</td>
                             <td class="font-medium">高橋</td>
                             <td>{{ $blog->updated_at }}</td>
+                            <td>{{ $blog->created_at }}</td>
                             <td>
                                 <div class="flex">
                                     <a class="mr-2" href="{{ route('admin.blogs.edit', ['blog' => $blog->id]) }}">
