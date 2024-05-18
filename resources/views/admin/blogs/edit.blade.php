@@ -10,6 +10,7 @@
                 @method('PUT')
                 <div class="flex px-6 pb-4 border-b">
                     <h3 class="text-xl font-bold">ブログ編集</h3>
+<<<<<<< HEAD
                     <div class="mx-auto">
                         <div>作成日時</div>
                         <div>{{ $blog->updated_at }}</div>
@@ -19,6 +20,8 @@
                         <div>{{ $blog->created_at }}</div>
                     </div>                                    
                   
+=======
+
                         <button type="submit"
                             class="py-2 px-3 text-xs text-white font-semibold bg-indigo-500 rounded-md">更新</button>
                     </div>
@@ -86,7 +89,13 @@
                         <label class="block text-sm font-medium mb-2">登場するねこ</label>
                         <select id="js-pulldown" class="mr-6 w-full" name="cats[]" multiple>
                             @foreach ($cats as $cat)
-                               <option value="{{ $cat->id }}" @if(in_array($cat->id, old('cats', $blog->cats->pluck('id')->all()))) selected @endif>{{ $cat->name }}</option>
+                               <option value="{{ $cat->id }}" @if(in_array($cat->id, old('cats', $blog->cats->pluck('id')->all()))) selected @endif>
+                               <div>
+                               名前: {{ $cat->name }}. 生年月日: {{ $cat->date_of_birth }}
+                               </div>
+
+
+                            </option>
                             @endforeach
                         </select>
                     </div>
