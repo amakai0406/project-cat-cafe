@@ -53,7 +53,7 @@
                     </div>
 
                     <div class="mb-6">
-                        <label class="block text-sm font-medium mb-2" for="body">本文</label>
+                        <label class="block text-sm font-medium mb-2" for="body">コメント</label>
                         <textarea id="body" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded"
                             name="body" rows="5">{{ old('body', $blog->body) }}</textarea>
                     </div>
