@@ -10,17 +10,13 @@
                 @method('PUT')
                 <div class="flex px-6 pb-4 border-b">
                     <h3 class="text-xl font-bold">ブログ編集</h3>
-<<<<<<< HEAD
+                    
                     <div class="mx-auto">
                         <div>作成日時</div>
+                        <div>{{ $blog->created_at }}</div>
+                        <div>更新日時</div>
                         <div>{{ $blog->updated_at }}</div>
                     </div>
-                    <div class="mx-auto">
-                        <div>更新日時</div>
-                        <div>{{ $blog->created_at }}</div>
-                    </div>                                    
-                  
-=======
 
                         <button type="submit"
                             class="py-2 px-3 text-xs text-white font-semibold bg-indigo-500 rounded-md">更新</button>
