@@ -70,7 +70,7 @@
                                     <option value="{{ $category->id }}" @if($category->id == old('category_id', $blog->category->id)) selected @endif>{{ $category->name }}</option>
                                 @endforeach
                             </select>
-                            <div
+                            <div>
                                 class="pointer-events-none transform -translate-x-full flex items-center px-2 text-gray-500">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
                                     viewbox="0 0 20 20">
@@ -86,7 +86,7 @@
                         <label class="block text-sm font-medium mb-2">登場するねこ</label>
                         <select id="js-pulldown" class="mr-6 w-full" name="cats[]" multiple>
                             @foreach ($cats as $cat)
-                               <option value="{{ $cat->id }}" @if(in_array($cat->id, old('cats', $blog->cats->pluck('id')->all()))) selected @endif>{{ $cat->name }}</option>
+                               <option value="{{ $cat->id }}" @if(in_array($cat->id, old('cats', $blog->cats->pluck('id')->all()))) selected @endif>{{ '  名前:  '.$cat->name. '  種類:   '.$cat->breed }}</option>
                             @endforeach
                         </select>
                     </div>
