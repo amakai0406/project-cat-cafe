@@ -10,6 +10,14 @@
                 @method('PUT')
                 <div class="flex px-6 pb-4 border-b">
                     <h3 class="text-xl font-bold">ブログ編集</h3>
+                    <div class="mx-auto">
+                        <div>作成日時</div>
+                        <div>{{ $blog->created_at }}</div>
+                    </div>
+                    <div class="mr-auto">
+                        <div>更新日時</div>
+                        <div>{{ $blog->updated_at }}</div>
+                    </div>
                     <div class="ml-auto">
                         <button type="submit"
                             class="py-2 px-3 text-xs text-white font-semibold bg-indigo-500 rounded-md">更新</button>
@@ -62,7 +70,7 @@
                                     <option value="{{ $category->id }}" @if($category->id == old('category_id', $blog->category->id)) selected @endif>{{ $category->name }}</option>
                                 @endforeach
                             </select>
-                            <div
+                            <div>
                                 class="pointer-events-none transform -translate-x-full flex items-center px-2 text-gray-500">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
                                     viewbox="0 0 20 20">
@@ -78,7 +86,7 @@
                         <label class="block text-sm font-medium mb-2">登場するねこ</label>
                         <select id="js-pulldown" class="mr-6 w-full" name="cats[]" multiple>
                             @foreach ($cats as $cat)
-                               <option value="{{ $cat->id }}" @if(in_array($cat->id, old('cats', $blog->cats->pluck('id')->all()))) selected @endif>{{ $cat->name }}</option>
+                               <option value="{{ $cat->id }}" @if(in_array($cat->id, old('cats', $blog->cats->pluck('id')->all()))) selected @endif>{{ '  名前:  '.$cat->name. '  種類:   '.$cat->breed }}</option>
                             @endforeach
                         </select>
                     </div>
