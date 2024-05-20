@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminBlogController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,6 +30,10 @@ Route::prefix(('/admin'))
 
             //ログアウト
             Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+            //お問い合わせ
+            Route::get('/contacts', [BlogController::class, 'create'])->name('contacts.create');
+            Route::post('/contacts', [BlogController::class, 'create'])->name('contacts.create');
         });
 
 
