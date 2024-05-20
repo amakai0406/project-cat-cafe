@@ -14,6 +14,8 @@
                     <div class="mx-auto">
                         <div>作成日時</div>
                         <div>{{ $blog->created_at }}</div>
+                    </div>
+                    <div class="mr-auto">
                         <div>更新日時</div>
                         <div>{{ $blog->updated_at }}</div>
                     </div>
