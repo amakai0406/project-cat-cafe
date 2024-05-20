@@ -26,13 +26,15 @@ Route::prefix(('/admin'))
             //ユーザ管理
             Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
             Route::post('/users', [UserController::class, 'store'])->name('users.store');
+            Route::get('/admins', [UserController::class, 'index'])->name('admins.index');
+            Route::post('/admins', [UserController::class, 'index'])->name('admins.index');
 
             //ログアウト
             Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
         });
 
 
-        //未ログイン時のみアクセス可能なルート
+        //未ログイン時のみアクセス可能なルー
         Route::middleware('guest')
             ->group(function () {
             //ログイン

@@ -43,7 +43,8 @@
                     <h3 class="mb-2 text-xs uppercase text-gray-500 font-medium">メニュー</h3>
                     <ul class="mb-8 text-sm font-medium">
                         <li>
-                            <a class="flex items-center pl-3 py-3 pr-4 text-gray-50 hover:bg-gray-900 rounded" href="#">
+                            <a class="flex items-center pl-3 py-3 pr-4 text-gray-50 hover:bg-gray-900 rounded"
+                                href="/admin/admins">
                                 <span class="inline-block mr-3">
                                     <svg class="text-gray-600 w-5 h-5" viewbox="0 0 18 18" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
