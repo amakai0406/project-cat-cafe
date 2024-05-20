@@ -70,7 +70,7 @@
                                     <option value="{{ $category->id }}" @if($category->id == old('category_id', $blog->category->id)) selected @endif>{{ $category->name }}</option>
                                 @endforeach
                             </select>
-                            <div>
+                            <div
                                 class="pointer-events-none transform -translate-x-full flex items-center px-2 text-gray-500">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
                                     viewbox="0 0 20 20">
