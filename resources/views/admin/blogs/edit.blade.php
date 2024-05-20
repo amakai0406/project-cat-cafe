@@ -90,6 +90,13 @@
                             @endforeach
                         </select>
                     </div>
+                    <div>登場するねこの紹介文</div>
+                    <div style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333;">
+                    @foreach ($cats as $cat)
+                    <div font-size="3">{{ $cat->name.'は'.$cat->date_of_birth.'に生まれて'.$cat->introduction}}</div>
+                    @endforeach
+                    </div>
+
                 </div>
             </form>
         </div>
