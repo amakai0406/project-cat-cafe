@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminBlogController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,6 +30,10 @@ Route::prefix(('/admin'))
 
             //ログアウト
             Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+            //お問い合わせ管理
+            Route::get('contacts/index', [BlogController::class, 'index'])->name('index.index');
+            Route::post('contacts/index', [BlogController::class, 'index'])->name('index.index');
         });
 
 
