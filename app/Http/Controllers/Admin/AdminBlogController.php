@@ -40,12 +40,20 @@ class AdminBlogController extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    //ブログの検索処理
+    public function show(Request $request, string $id)
     {
-        //
+        $blogs = Blog::query();
+
+
+        $keyword = $request->input('keyword');
+        if (!empty($keyword)) {
+            $blogs->where('title', 'LIKE', "%{$keyword}%");
+
+            $blogs = $blogs->get();
+
+            return view('admin.blogs.index', ['blogs' => $blogs]);
+        }
     }
 
     //指定したIDのブログ編集画面
