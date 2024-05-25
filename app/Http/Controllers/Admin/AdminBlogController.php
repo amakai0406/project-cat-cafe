@@ -41,19 +41,29 @@ class AdminBlogController extends Controller
     }
 
     //ブログの検索処理
-    public function show(Request $request, string $id)
+
+    public function search(Request $request)
     {
+        $keyword = $request->input('keyword');
+
         $blogs = Blog::query();
 
-
-        $keyword = $request->input('keyword');
         if (!empty($keyword)) {
-            $blogs->where('title', 'LIKE', "%{$keyword}%");
-
-            $blogs = $blogs->get();
-
-            return view('admin.blogs.index', ['blogs' => $blogs]);
+            $blogs->where('title', 'LIKE', "%{$keyword}%")
+                ->orWhere('created_at', 'LIKE', "%{$keyword}%")
+                ->orWhere('updated_at', 'LIKE', "%{$keyword}%");
         }
+
+        $blogs = $blogs->latest('updated_at')->simplePaginate(10);
+
+        return view('admin.blogs.index', ['blogs' => $blogs]);
+    }
+
+
+
+    public function show(Request $request, string $id)
+    {
+        //
     }
 
     //指定したIDのブログ編集画面
@@ -89,12 +99,24 @@ class AdminBlogController extends Controller
     }
 
     //指定したIDのブログの削除処理
+    // public function destroy(string $id)
+    // {
+    //     $blog = Blog::findOrFail($id);
+    //     $blog->delete();
+    //     Storage::disk('public')->delete($blog->image);
+
+    //     return to_route('admin.blogs.index')->with('success', 'ブログを削除しました');
+    // }
+
     public function destroy(string $id)
     {
         $blog = Blog::findOrFail($id);
-        $blog->delete();
-        Storage::disk('public')->delete($blog->image);
+        $imagePath = $blog->image;
 
-        return to_route('admin.blogs.index')->with('success', 'ブログを削除しました');
+        $blog->delete();
+        Storage::disk('public')->delete($imagePath);
+
+        return redirect()->route('admin.blogs.index')->with('success', 'ブログを削除しました');
     }
+
 }
