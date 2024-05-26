@@ -49,9 +49,7 @@ class AdminBlogController extends Controller
         $blogs = Blog::query();
 
         if (!empty($keyword)) {
-            $blogs->where('title', 'LIKE', "%{$keyword}%")
-                ->orWhere('created_at', 'LIKE', "%{$keyword}%")
-                ->orWhere('updated_at', 'LIKE', "%{$keyword}%");
+            $blogs->where('title', 'LIKE', "%{$keyword}%");
         }
 
         $blogs = $blogs->latest('updated_at')->simplePaginate(10);

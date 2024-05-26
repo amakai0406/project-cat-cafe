@@ -9,6 +9,20 @@
                 <form action="{{ route('admin.blogs.search') }}" method="get">
                     <input type="text" name="keyword" placeholder="検索キーワードを入力してください">
                     <input type="submit" value="検索する">
+
+                    <div>
+                        <label for="">カテゴリー
+                            <div>
+                                <select name="category" data-toggle="select">
+                                    <option value="">全て</option>
+                                    @foreach ( as )
+
+                                    
+                                    @endforeach
+                                </select>
+                            </div>
+                        </label>
+                    </div>
                 </form>
             </div>
 
