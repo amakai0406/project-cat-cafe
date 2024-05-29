@@ -9,21 +9,17 @@
                 <form action="{{ route('admin.blogs.search') }}" method="get">
                     <input type="text" name="keyword" placeholder="検索キーワードを入力してください">
                     <input type="submit" value="検索する">
-
                     <div>
-                        <label for="">カテゴリー
-                            <div>
-                                <select name="category" data-toggle="select">
-                                    <option value="">全て</option>
-                                    @foreach ( as )
-
-                                    
-                                    @endforeach
-                                </select>
-                            </div>
-                        </label>
+                        <label for="category">カテゴリー:</label>
+                        <select name="category_id" id="category">
+                            <option value="">全て</option>
+                            @foreach ($categories as $category)
+                                <option value="{{ $category->id }}" @if(request('category_id') == $category->id) selected @endif>{{ $category->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </form>
+                
             </div>
 
         </div>

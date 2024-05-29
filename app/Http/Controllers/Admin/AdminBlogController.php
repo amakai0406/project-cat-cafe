@@ -16,9 +16,10 @@ class AdminBlogController extends Controller
     //ブログ一覧画面
     public function index()
     {
+        $categories = Category::all();
 
         $blogs = Blog::latest('updated_at')->simplePaginate(10);
-        return view('admin.blogs.index', ['blogs' => $blogs]);
+        return view('admin.blogs.index', compact('blogs', 'categories'));
     }
 
     //ブログ投稿画面
@@ -52,9 +53,17 @@ class AdminBlogController extends Controller
             $blogs->where('title', 'LIKE', "%{$keyword}%");
         }
 
+
+        if ($request->filled('category_id')) {
+            $blogs->where('category_id', $request->input('category_id'));
+        }
+
         $blogs = $blogs->latest('updated_at')->simplePaginate(10);
 
-        return view('admin.blogs.index', ['blogs' => $blogs]);
+        $categories = Category::all();
+
+
+        return view('admin.blogs.index', compact('blogs', 'categories'));
     }
 
 

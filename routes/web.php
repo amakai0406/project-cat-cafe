@@ -29,6 +29,7 @@ Route::prefix(('/admin'))
             Route::get('/blogs/{blog}/edit', [AdminBlogController::class, 'edit'])->name('blogs.edit');
             Route::put('/blogs/{id}', [AdminBlogController::class, 'update'])->name('blogs.update');
             Route::delete('/blogs/{blog}', [AdminBlogController::class, 'destroy'])->name('blogs.destroy');
+            Route::get('/blogs/showAll', [AdminBlogController::class, 'list'])->name('blogs.list');
 
 
             //ユーザ管理
