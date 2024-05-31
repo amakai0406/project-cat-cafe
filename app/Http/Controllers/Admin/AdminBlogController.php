@@ -10,16 +10,20 @@ use App\Models\Blog;
 use App\Models\cat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class AdminBlogController extends Controller
 {
     //ブログ一覧画面
-    public function index()
+    public function index(Request $request)
     {
         $categories = Category::all();
-
+        $updatedFrom = $request->input('updatedFrom');
+        $updatedUntil = $request->input('updatedUntil');
+        $createdFrom = $request->input('createdFrom');
+        $createdUntil = $request->input('createdUntil');
         $blogs = Blog::latest('updated_at')->simplePaginate(10);
-        return view('admin.blogs.index', compact('blogs', 'categories'));
+        return view('admin.blogs.index', compact('blogs', 'categories', 'updatedFrom', 'updatedUntil', 'createdFrom', 'createdUntil'));
     }
 
     //ブログ投稿画面
@@ -35,7 +39,7 @@ class AdminBlogController extends Controller
         $savedImagePath = $request->file('image')->store('blogs', 'public');
         $blog = new Blog($request->validated());
         $blog->image = $savedImagePath;
-        $blog->save();
+
 
         return to_route('admin.blogs.index')->with('success', 'ブログを投稿しました');
 
@@ -45,7 +49,13 @@ class AdminBlogController extends Controller
 
     public function search(Request $request)
     {
+
         $keyword = $request->input('keyword');
+        $categoryId = $request->input('category_id');
+        $updatedFrom = $request->input('updatedFrom');
+        $updatedUntil = $request->input('updatedUntil');
+        $createdFrom = $request->input('createdFrom');
+        $createdUntil = $request->input('createdUntil');
 
         $blogs = Blog::query();
 
@@ -53,17 +63,24 @@ class AdminBlogController extends Controller
             $blogs->where('title', 'LIKE', "%{$keyword}%");
         }
 
-
-        if ($request->filled('category_id')) {
-            $blogs->where('category_id', $request->input('category_id'));
+        if (!empty($categoryId)) {
+            $blogs->where('category_id', $categoryId);
         }
 
-        $blogs = $blogs->latest('updated_at')->simplePaginate(10);
+        if (!empty($from) && !empty($until)) {
+            $blogs->whereBetween(Blog::raw('DATE(updated_at)'), [$updatedFrom, $updatedUntil]);
+        }
+
+        if (!empty($from) && !empty($until)) {
+            $blogs->whereBetween(Blog::raw('DATE(created_at)'), [$$createdFrom, $createdUntil]);
+        }
 
         $categories = Category::all();
 
+        $blogs = $blogs->latest('updated_at')->simplePaginate(10);
 
-        return view('admin.blogs.index', compact('blogs', 'categories'));
+        return view('admin.blogs.index', compact('blogs', 'categories', 'updatedFrom', 'updatedUntil', 'createdFrom', 'createdUntil'));
+
     }
 
 

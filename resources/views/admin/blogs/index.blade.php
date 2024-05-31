@@ -7,23 +7,39 @@
             <h2 class="text-xl font-bold">ブログ一覧</h2>
             <div class="mx-auto">
                 <form action="{{ route('admin.blogs.search') }}" method="get">
-                    <input type="text" name="keyword" placeholder="検索キーワードを入力してください">
-                    <input type="submit" value="検索する">
+                    <input type="text" name="keyword" placeholder="検索キーワードを入力" value="{{ request('keyword') }}">
                     <div>
-                        <label for="category">カテゴリー:</label>
+                        <label for="category">カテゴリー :</label>
                         <select name="category_id" id="category">
                             <option value="">全て</option>
                             @foreach ($categories as $category)
-                                <option value="{{ $category->id }}" @if(request('category_id') == $category->id) selected @endif>{{ $category->name }}</option>
+                                <option value="{{ $category->id }}" @if(request('category_id') == $category->id) selected
+                                @endif>{{ $category->name }}</option>
                             @endforeach
                         </select>
+                        <div>
+                            <label for="">更新日時検索 :</label>
+                            <input type="date" name="updated_from" placeholder="from_date"
+                                value="{{ request('updated_from' . $updatedFrom) }}">
+                            <span class="mx-3">~</span>
+                            <input type="date" name="updated_until" placeholder="until_date"
+                                value="{{ request('updated_until' . $updatedUntil) }}">
+                            <span class="mx-7">|</span>
+                            <label for="">作成日時検索 :</label>
+                            <input type="date" name="created_from" placeholder="from_date"
+                                value="{{ request('created_from' . $createdFrom) }}">
+                            <span class="mx-3">~</span>
+                            <input type="date" name="created_until" placeholder="until_date"
+                                value="{{ request('created_until' . $createdUntil) }}">
+                        </div>
                     </div>
+                    <input type="submit" value="検索する">
                 </form>
-                
+
             </div>
 
         </div>
-        <div class="ml-auto">
+        <div class="flex justify-end mt-4 mr-4">
             <a href="/admin/blogs/create"
                 class="py-2 px-3 text-xs text-white font-semibold bg-indigo-500 rounded-md">新規投稿</a>
         </div>
@@ -42,7 +58,7 @@
             </thead>
             <tbody>
                 @foreach($blogs as $blog)
-                    <tr @class(['text-sm', 'bg-gray-50'=> $loop->odd])>
+                    <tr @class(['text-sm', 'bg-gray-50' => $loop->odd])>
                         <td class="flex px-4 py-3 items-center">
                             <img class="w-12 h-12 mr-4 object-cover rounded-md" src="{{ asset('storage/' . $blog->image) }}"
                                 alt="">
