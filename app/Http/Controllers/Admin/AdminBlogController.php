@@ -10,7 +10,6 @@ use App\Models\Blog;
 use App\Models\cat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Auth;
 
 class AdminBlogController extends Controller
 {
