@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminBlogController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,7 +22,15 @@ Route::prefix(('/admin'))
         Route::middleware('auth')
             ->group(function () {
             //ブログ
-            Route::resource('/blogs', AdminBlogController::class);
+            Route::get('/blogs', [AdminBlogController::class, 'index'])->name('blogs.index');
+            Route::get('/blogs/create', [AdminBlogController::class, 'create'])->name('blogs.create');
+            Route::post('/blogs', [AdminBlogController::class, 'store'])->name('blogs.store');
+            Route::get('/blogs/search', [AdminBlogController::class, 'search'])->name('blogs.search');
+            Route::get('/blogs/{blog}/edit', [AdminBlogController::class, 'edit'])->name('blogs.edit');
+            Route::put('/blogs/{id}', [AdminBlogController::class, 'update'])->name('blogs.update');
+            Route::delete('/blogs/{blog}', [AdminBlogController::class, 'destroy'])->name('blogs.destroy');
+            Route::get('/blogs/showAll', [AdminBlogController::class, 'list'])->name('blogs.list');
+
 
             //ユーザ管理
             Route::get('/users/create', [UserController::class, 'create'])->name('users.create');

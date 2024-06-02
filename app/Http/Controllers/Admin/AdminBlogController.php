@@ -14,11 +14,15 @@ use Illuminate\Support\Facades\Storage;
 class AdminBlogController extends Controller
 {
     //ブログ一覧画面
-    public function index()
+    public function index(Request $request)
     {
-
+        $categories = Category::all();
+        $updatedFrom = $request->input('updatedFrom');
+        $updatedUntil = $request->input('updatedUntil');
+        $createdFrom = $request->input('createdFrom');
+        $createdUntil = $request->input('createdUntil');
         $blogs = Blog::latest('updated_at')->simplePaginate(10);
-        return view('admin.blogs.index', ['blogs' => $blogs]);
+        return view('admin.blogs.index', compact('blogs', 'categories', 'updatedFrom', 'updatedUntil', 'createdFrom', 'createdUntil'));
     }
 
     //ブログ投稿画面
@@ -34,16 +38,53 @@ class AdminBlogController extends Controller
         $savedImagePath = $request->file('image')->store('blogs', 'public');
         $blog = new Blog($request->validated());
         $blog->image = $savedImagePath;
-        $blog->save();
+
 
         return to_route('admin.blogs.index')->with('success', 'ブログを投稿しました');
 
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    //ブログの検索処理
+
+    public function search(Request $request)
+    {
+
+        $keyword = $request->input('keyword');
+        $categoryId = $request->input('category_id');
+        $updatedFrom = $request->input('updated_from');
+        $updatedUntil = $request->input('updated_until');
+        $createdFrom = $request->input('created_from');
+        $createdUntil = $request->input('created_until');
+
+        $blogs = Blog::query();
+
+        if (!empty($keyword)) {
+            $blogs->where('title', 'LIKE', "%{$keyword}%");
+        }
+
+        if (!empty($categoryId)) {
+            $blogs->where('category_id', $categoryId);
+        }
+
+        if (!empty($updatedFrom) && !empty($updatedUntil)) {
+            $blogs->whereBetween(Blog::raw('DATE(updated_at)'), [$updatedFrom, $updatedUntil]);
+        }
+
+        if (!empty($createdFrom) && !empty($createdUntil)) {
+            $blogs->whereBetween(Blog::raw('DATE(created_at)'), [$createdFrom, $createdUntil]);
+        }
+
+        $categories = Category::all();
+
+        $blogs = $blogs->latest('updated_at')->simplePaginate(10);
+
+        return view('admin.blogs.index', compact('blogs', 'categories', 'updatedFrom', 'updatedUntil', 'createdFrom', 'createdUntil'));
+
+    }
+
+
+
+    public function show(Request $request, string $id)
     {
         //
     }
@@ -81,12 +122,24 @@ class AdminBlogController extends Controller
     }
 
     //指定したIDのブログの削除処理
+    // public function destroy(string $id)
+    // {
+    //     $blog = Blog::findOrFail($id);
+    //     $blog->delete();
+    //     Storage::disk('public')->delete($blog->image);
+
+    //     return to_route('admin.blogs.index')->with('success', 'ブログを削除しました');
+    // }
+
     public function destroy(string $id)
     {
         $blog = Blog::findOrFail($id);
-        $blog->delete();
-        Storage::disk('public')->delete($blog->image);
+        $imagePath = $blog->image;
 
-        return to_route('admin.blogs.index')->with('success', 'ブログを削除しました');
+        $blog->delete();
+        Storage::disk('public')->delete($imagePath);
+
+        return redirect()->route('admin.blogs.index')->with('success', 'ブログを削除しました');
     }
+
 }
