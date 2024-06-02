@@ -52,10 +52,10 @@ class AdminBlogController extends Controller
 
         $keyword = $request->input('keyword');
         $categoryId = $request->input('category_id');
-        $updatedFrom = $request->input('updatedFrom');
-        $updatedUntil = $request->input('updatedUntil');
-        $createdFrom = $request->input('createdFrom');
-        $createdUntil = $request->input('createdUntil');
+        $updatedFrom = $request->input('updated_from');
+        $updatedUntil = $request->input('updated_until');
+        $createdFrom = $request->input('created_from');
+        $createdUntil = $request->input('created_until');
 
         $blogs = Blog::query();
 
@@ -67,12 +67,12 @@ class AdminBlogController extends Controller
             $blogs->where('category_id', $categoryId);
         }
 
-        if (!empty($from) && !empty($until)) {
+        if (!empty($updatedFrom) && !empty($updatedUntil)) {
             $blogs->whereBetween(Blog::raw('DATE(updated_at)'), [$updatedFrom, $updatedUntil]);
         }
 
-        if (!empty($from) && !empty($until)) {
-            $blogs->whereBetween(Blog::raw('DATE(created_at)'), [$$createdFrom, $createdUntil]);
+        if (!empty($createdFrom) && !empty($createdUntil)) {
+            $blogs->whereBetween(Blog::raw('DATE(created_at)'), [$createdFrom, $createdUntil]);
         }
 
         $categories = Category::all();
