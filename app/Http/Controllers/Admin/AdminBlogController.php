@@ -8,7 +8,6 @@ use App\Http\Requests\Admin\UpdateBlogRequest;
 use App\Models\Category;
 use App\Models\Blog;
 use App\Models\cat;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -18,7 +17,6 @@ class AdminBlogController extends Controller
     public function index(Request $request)
     {
         $categories = Category::all();
-        $users = User::all();
         $updatedFrom = $request->input('updatedFrom');
         $updatedUntil = $request->input('updatedUntil');
         $createdFrom = $request->input('createdFrom');
