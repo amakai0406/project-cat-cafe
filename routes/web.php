@@ -38,6 +38,8 @@ Route::prefix(('/admin'))
 
             Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
             Route::post('/users/{user}', [UserController::class, 'update'])->name('users.update');
+            Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');
+
 
             //ログアウト
             Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
