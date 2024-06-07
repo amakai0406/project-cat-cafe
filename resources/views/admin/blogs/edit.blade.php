@@ -4,7 +4,7 @@
 <section class="py-8">
     <div class="container px-4 mx-auto">
         <div class="py-4 bg-white rounded">
-            <form action="{{ route('admin.blogs.update', ['id' => $blog->id]) }}" method="post"
+            <form action="{{ route('admin.blogs.update', ['user' => $blog->id]) }}" method="post"
                 enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
@@ -87,14 +87,16 @@
                         <select id="js-pulldown" class="mr-6 w-full" name="cats[]" multiple>
                             @foreach ($cats as $cat)
                                 <option value="{{ $cat->id }}" @if(in_array($cat->id, old('cats', $blog->cats->pluck('id')->all()))) selected @endif>
-                                    {{ '  名前:  ' . $cat->name . '  種類:   ' . $cat->breed }}</option>
+                                    {{ '  名前:  ' . $cat->name . '  種類:   ' . $cat->breed }}
+                                </option>
                             @endforeach
                         </select>
                     </div>
                     <div>登場するねこの紹介文</div>
                     <div style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333;">
                         @foreach ($cats as $cat)
-                            <div font-size="3">{{ $cat->name . 'は' . $cat->date_of_birth . 'に生まれて' . $cat->introduction}}</div>
+                            <div font-size="3">{{ $cat->name . 'は' . $cat->date_of_birth . 'に生まれて' . $cat->introduction}}
+                            </div>
                         @endforeach
                     </div>
 

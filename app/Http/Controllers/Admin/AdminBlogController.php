@@ -10,6 +10,7 @@ use App\Models\Blog;
 use App\Models\cat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class AdminBlogController extends Controller
 {
@@ -22,7 +23,10 @@ class AdminBlogController extends Controller
         $createdFrom = $request->input('createdFrom');
         $createdUntil = $request->input('createdUntil');
         $blogs = Blog::latest('updated_at')->simplePaginate(10);
-        return view('admin.blogs.index', compact('blogs', 'categories', 'updatedFrom', 'updatedUntil', 'createdFrom', 'createdUntil'));
+
+        $user = Auth::user();
+
+        return view('admin.blogs.index', compact('blogs', 'categories', 'updatedFrom', 'updatedUntil', 'createdFrom', 'createdUntil', 'user'));
     }
 
     //ブログ投稿画面
