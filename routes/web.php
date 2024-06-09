@@ -3,7 +3,7 @@
 use App\Http\Controllers\Admin\AdminBlogController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\AuthController;
-use App\Http\Controllers\BlogController;
+use App\Http\Controllers\Admin\CatController;
 use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
 
@@ -35,6 +35,9 @@ Route::prefix(('/admin'))
             //ユーザ管理
             Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
             Route::post('/users', [UserController::class, 'store'])->name('users.store');
+
+            //猫管理
+            Route::get('/cats', [CatController::class, 'index'])->name('cats.index');
 
             //ログアウト
             Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
