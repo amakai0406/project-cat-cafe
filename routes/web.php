@@ -11,7 +11,7 @@ Route::view('/', 'index');
 
 //お問い合わせフォーム
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
-Route::post('/contact', [ContactController::class, 'sendMail']);
+Route::post('/contact', [ContactController::class, 'sendMail'])->name('contact.sendMail');
 Route::get('/contact/complete', [ContactController::class, 'complete'])->name('contact.complete');
 
 //管理画面
@@ -35,6 +35,9 @@ Route::prefix(('/admin'))
             //ユーザ管理
             Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
             Route::post('/users', [UserController::class, 'store'])->name('users.store');
+
+            //お問合せ管理
+            Route::get('/contacts', [ContactController::class, 'sendMail'])->name('contacts.sendMail');
 
             //ログアウト
             Route::post('/logout', [AuthController::class, 'logout'])->name('logout');

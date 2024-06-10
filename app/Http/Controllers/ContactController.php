@@ -6,17 +6,33 @@ use App\Http\Requests\ContactRequest;
 use App\Mail\ContactAdminMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use App\Models\Contact;
 
 class ContactController extends Controller
 {
     public function index()
     {
-        return view('contact.index');
+        return view('admin.contacts.index');
+    }
+
+    public function show()
+    {
+        return view('admin.contacts.index');
     }
 
     function sendMail(ContactRequest $request)
     {
         $validated = $request->validated();
+
+        $contact = new Contact();
+
+        $contact->name = $validated['name'];
+        $contact->name_kana = $validated['name_kana'];
+        $contact->phone = $validated['phone'];
+        $contact->email = $validated['email'];
+        $contact->body = $validated['body'];
+
+        $contact->save();
 
         // これ以降の行は入力エラーがなかった場合のみ実行されます
         // 登録処理(実際はメール送信などを行う)
