@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\cat;
+use App\Models\Cat;
 use Illuminate\Http\Request;
 
 class CatController extends Controller
@@ -13,7 +13,6 @@ class CatController extends Controller
         $cats = Cat::all();
 
         return view('admin.cats.index', compact('cats'));
-        //compact(' compact', 'breed', 'gender', 'dateOfBirth', 'image', 'introduction', 'createdId', 'updatedAt')
 
     }
 
