@@ -13,9 +13,8 @@ class ContactController extends Controller
     public function index(Request $request)
     {
         $contacts = Contact::all();
-        $name = $request->input('name');
 
-        return view('admin.contacts.index', compact('contacts', 'name'));
+        return view('admin.contacts.index', compact('contacts'));
     }
 
     public function show()
