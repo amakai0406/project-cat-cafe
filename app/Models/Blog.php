@@ -21,6 +21,11 @@ class Blog extends Model
         return $this->belongsToMany(Cat::class)->withTimestamps();
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function blogs()
     {
         $blogs = Blog::all();

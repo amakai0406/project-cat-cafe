@@ -35,10 +35,14 @@ class AdminBlogController extends Controller
     //ブログ投稿処理
     public function store(StoreBlogRequest $request)
     {
+        $userId = auth()->user()->id;
+
         $savedImagePath = $request->file('image')->store('blogs', 'public');
+
         $blog = new Blog($request->validated());
         $blog->image = $savedImagePath;
-
+        $blog->user_id = $userId;
+        $blog->save();
 
         return to_route('admin.blogs.index')->with('success', 'ブログを投稿しました');
 
