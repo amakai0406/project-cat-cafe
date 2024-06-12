@@ -10,14 +10,18 @@ use App\Models\Contact;
 
 class ContactController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return view('admin.contacts.index');
+        $contacts = Contact::all();
+        $name = $request->input('name');
+
+        return view('admin.contacts.index', compact('contacts', 'name'));
     }
 
     public function show()
     {
-        return view('admin.contacts.index');
+        $contacts = Contact::all();
+        return view('contacts.index', compact('contacts'));
     }
 
     function sendMail(ContactRequest $request)
@@ -42,6 +46,6 @@ class ContactController extends Controller
 
     public function complete()
     {
-        return view('contact.complete');
+        return view('contacts.complete');
     }
 }

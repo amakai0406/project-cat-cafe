@@ -29,7 +29,7 @@
     @endif
       <!-- ▲▲▲▲エラーメッセージ▲▲▲▲　-->
 
-      <form action="{{ route('admin.contacts.sendMail') }}" method="post">
+      <form action="{{ route('contact') }}" method="post">
         @csrf
         <div class="mb-4">
           <label for="name" class="block text-left p-1 my-1 font-medium">お名前<span
