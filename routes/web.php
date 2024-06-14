@@ -38,6 +38,8 @@ Route::prefix(('/admin'))
 
             //猫管理
             Route::get('/cats', [CatController::class, 'index'])->name('cats.index');
+            Route::get('/cats/create', [CatController::class, 'create'])->name('cats.create');
+            Route::post('/cats', [CatController::class, 'store'])->name('cats.store');
 
             //ログアウト
             Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
