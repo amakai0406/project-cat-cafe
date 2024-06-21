@@ -22,14 +22,15 @@
       <div class="mb-8 py-4 px-6 border border-pink-300 bg-pink-50 rounded">
       <ul>
         @foreach($errors->all() as $error)
-      <li class="text-pink-400">{{ $error}}</l>
+      <li class="text-pink-400">{{ $error}}</li>
     @endforeach
       </ul>
       </div>
     @endif
+
       <!-- ▲▲▲▲エラーメッセージ▲▲▲▲　-->
 
-      <form action="{{ route('contact') }}" method="post">
+      <form action="{{ route('contact.sendMail') }}" method="post">
         @csrf
         <div class="mb-4">
           <label for="name" class="block text-left p-1 my-1 font-medium">お名前<span

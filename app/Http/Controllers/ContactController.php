@@ -4,47 +4,51 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ContactRequest;
 use App\Mail\ContactAdminMail;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Models\Contact;
 
 class ContactController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
-        $contacts = Contact::all();
-
-        return view('admin.contacts.index', compact('contacts'));
+        //お問い合わせ画面の表示
+        return view('contacts.index');
     }
 
     public function show()
     {
-        $contacts = Contact::all();
-        return view('contacts.index', compact('contacts'));
+        //
     }
 
     function sendMail(ContactRequest $request)
     {
+        //ContactRequestから送られてきた値を検証
         $validated = $request->validated();
 
+        //インスタンスの作成
         $contact = new Contact();
 
+        //作成したインスタンスに渡って来たデータを各プロパティに格納(検証済みのデータ)
         $contact->name = $validated['name'];
         $contact->name_kana = $validated['name_kana'];
         $contact->phone = $validated['phone'];
         $contact->email = $validated['email'];
         $contact->body = $validated['body'];
 
+        //データべすに保存
         $contact->save();
 
-        // これ以降の行は入力エラーがなかった場合のみ実行されます
         // 登録処理(実際はメール送信などを行う)
+        //保存されたデータは、ContactAdminMailインスタンスが作成され、amakaiamakai0406@gmail.comに送信される
         Mail::to('amakaiamakai0406@gmail.com')->send(new ContactAdminMail($validated));
-        return to_route('contact.complete');
+        //リダイレクトでcontacts.completeへ
+        //Route::get('/contact/complete', [ContactController::class, 'complete'])->name('contacts.complete');↓
+        return redirect()->route('contacts.complete');
     }
 
     public function complete()
     {
+        //登録完了ページを表示
         return view('contacts.complete');
     }
 }

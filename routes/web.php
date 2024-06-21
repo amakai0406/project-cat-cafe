@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminBlogController;
+use App\Http\Controllers\Admin\AdminContactController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\CatController;
@@ -10,8 +11,12 @@ use Illuminate\Support\Facades\Route;
 Route::view('/', 'index');
 
 //お問い合わせフォーム
+
+//contactにアクセスがあった場合、登録画面を表示
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
-Route::post('/contact', [ContactController::class, 'sendMail'])->name('contact');
+//クライアントが登録画面を入力後送信した際、DBにデータを保存
+Route::post('/contact/sendMail', [ContactController::class, 'sendMail'])->name('contact.sendMail');
+//完了画面の表示
 Route::get('/contact/complete', [ContactController::class, 'complete'])->name('contacts.complete');
 
 //管理画面
@@ -38,8 +43,8 @@ Route::prefix(('/admin'))
 
 
             //お問合せ管理
-            Route::get('/contacts', [ContactController::class, 'index'])->name('contacts.index');
-            Route::get('/contact', [ContactController::class, 'show'])->name('contact.show');
+            Route::get('/contacts', [AdminContactController::class, 'index'])->name('contacts.index');
+            Route::get('/contacts/show/{id}', [AdminContactController::class, 'show'])->name('contacts.show');
 
             //猫管理
             Route::get('/cats', [CatController::class, 'index'])->name('cats.index');
