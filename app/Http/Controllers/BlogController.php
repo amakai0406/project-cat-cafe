@@ -7,12 +7,11 @@ use Illuminate\Http\Request;
 
 class BlogController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $blogs = Blog::orderBy('created_at', 'desc')->get();
+
+        return view('blogs.index', compact(('blogs')));
     }
 
     /**
