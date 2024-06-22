@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\CatController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\UserCatController;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'index');
@@ -13,6 +14,9 @@ Route::view('/', 'index');
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::post('/contact', [ContactController::class, 'sendMail']);
 Route::get('/contact/complete', [ContactController::class, 'complete'])->name('contact.complete');
+
+//TOPページねこちゃんたちからねこ一覧画面
+Route::get('/cats', [UserCatController::class, 'index'])->name('cats.index');
 
 //管理画面
 Route::prefix(('/admin'))
