@@ -9,8 +9,10 @@ class BlogController extends Controller
 {
     public function index()
     {
+        //created_atを降順にしてblogsテーブルから全レコードを取得
         $blogs = Blog::orderBy('created_at', 'desc')->get();
 
+        //戻り値はblogs.indexページで'blogs'=>$blogs渡している
         return view('blogs.index', compact(('blogs')));
     }
 
