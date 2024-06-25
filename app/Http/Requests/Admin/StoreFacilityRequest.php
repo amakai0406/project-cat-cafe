@@ -17,7 +17,7 @@ class StoreFacilityRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|max:100',
+            'name' => 'required|string|max:255',
             'image' => [
                 'required',
                 'image',
@@ -26,7 +26,7 @@ class StoreFacilityRequest extends FormRequest
                 //ファイルサイズの最大値
                 'max:2048',
             ],
-            'description' => 'required|string|max:100',
+            'description' => 'required|string|max:500',
             //date: このフィールドは有効な日付である必要があります。
             'installed_at' => 'required|date',
         ];
