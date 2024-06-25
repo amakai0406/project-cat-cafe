@@ -61,15 +61,10 @@
     </div>
     <script>
         // 画像プレビュー
-        //id='image'に対してchangeイベントリスナー(ユーザーがファイルを選択または変更したときに呼び出され)を追加
-        //id='previewImage'のHTMLを取得
-        //ファイルの内容を読み取るためのFileReaderオブジェクトを参照し、ァイルの読み取りが可能
-        //FileReaderオブジェクトのonloadイベントプロパティ。ファイルの読み取りが完了したときに実行される関数を指定
-
         document.getElementById('image').addEventListener('change', e => {
             const previewImageNode = document.getElementById('previewImage')
             const fileReader = new FileReader()
-            fileReader.onload = () => previewImageNode.src = fileReader.result=> previewImageNode.src = fileReader.result
+            fileReader.onload = () => previewImageNode.src = fileReader.result
             if (e.target.files.length > 0) {
                 fileReader.readAsDataURL(e.target.files[0])
             } else {
