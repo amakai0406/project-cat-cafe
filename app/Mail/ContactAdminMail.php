@@ -36,10 +36,12 @@ class ContactAdminMail extends Mailable
     /**
      *  the message content definition.
      */
+
+    //メール通知やメッセージ生成 新しいオブジェクト作成　textプロパティに'contacts.complete'
     public function content(): Content
     {
         return new Content(
-            text: 'emails.contact.admin',
+            text: 'contacts.complete',
         );
     }
 
