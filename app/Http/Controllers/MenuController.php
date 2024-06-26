@@ -6,11 +6,9 @@ use App\Models\Menu;
 
 class MenuController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
+        //戻り値は、viewヘルパーでviewファイルのmenus.index
         return view('menus.index');
     }
 
