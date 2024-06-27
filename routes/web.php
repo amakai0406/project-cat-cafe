@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\CatController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\FacilityController;
+use App\Http\Controllers\FaqController;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'index');
@@ -22,6 +23,9 @@ Route::get('/contact/complete', [ContactController::class, 'complete'])->name('c
 
 //TOPページの設備から設備ページ
 Route::get('/facilities', [FacilityController::class, 'index'])->name('facilities.index');
+
+//TOPページのよくある質問から質問ページ
+Route::get('/faqs', [FaqController::class, 'index'])->name('faqs.index');
 
 //管理画面
 Route::prefix(('/admin'))
@@ -58,6 +62,10 @@ Route::prefix(('/admin'))
             //設備管理
             Route::get('/facilities/create', [FacilityController::class, 'create'])->name('facilities.create');
             Route::post('/facilities', [FacilityController::class, 'store'])->name('facilities.store');
+
+            //質問管理
+            Route::get('/faqs/create', [FaqController::class, 'create'])->name('faqs.create');
+            Route::post('/faqs', [FaqController::class, 'store'])->name('faqs.store');
 
 
 
