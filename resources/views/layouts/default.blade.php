@@ -24,7 +24,7 @@
                     <li><a class="text-sm text-blueGray-400 hover:text-blueGray-500" href="/cats">ねこちゃんたち</a></li>
 
                     <li><a class="text-sm text-blueGray-400 hover:text-blueGray-500" href="/blogs">ブログ</a></li>
-                    <li><a class="text-sm text-blueGray-400 hover:text-blueGray-500" href="#">メニュー</a></li>
+                    <li><a class="text-sm text-blueGray-400 hover:text-blueGray-500" href="/menus">メニュー</a></li>
                     <li><a class="text-sm text-blueGray-400 hover:text-blueGray-500" href="#">よくあるご質問</a></li>
                 </ul>
                 <div>

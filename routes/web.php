@@ -7,12 +7,16 @@ use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\CatController;
 use App\Http\Controllers\ContactController;
 
+use App\Http\Controllers\MenuController;
+
+
 use App\Http\Controllers\BlogController;
 
 
 use App\Http\Controllers\FacilityController;
 
 use App\Http\Controllers\UserCatController;
+
 
 
 use Illuminate\Support\Facades\Route;
@@ -36,6 +40,9 @@ Route::get('/cats', [UserCatController::class, 'index'])->name('cats.index');
 
 //TOPページのブログからブログ一覧表示
 Route::get('/blogs', [BlogController::class, 'index'])->name('blogs.index');
+
+//メニュー画面の表示
+Route::get('/menus', [MenuController::class, 'index'])->name('index.menus');
 
 //管理画面
 Route::prefix(('/admin'))
