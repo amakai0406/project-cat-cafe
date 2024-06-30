@@ -19,17 +19,18 @@
     <div class="mt-8">
       <!-- ▼▼▼▼エラーメッセージ▼▼▼▼　-->
       @if($errors->any())
-    <div class="mb-8 py-4 px-6 border border-pink-300 bg-pink-50 rounded">
+      <div class="mb-8 py-4 px-6 border border-pink-300 bg-pink-50 rounded">
       <ul>
-      @foreach($errors->all() as $error)
-    <li class="text-pink-400">{{ $error}}</l>
-  @endforeach
+        @foreach($errors->all() as $error)
+      <li class="text-pink-400">{{ $error}}</li>
+    @endforeach
       </ul>
-    </div>
-  @endif
+      </div>
+    @endif
+
       <!-- ▲▲▲▲エラーメッセージ▲▲▲▲　-->
 
-      <form action="{{ route('contact') }}" method="post">
+      <form action="{{ route('contact.sendMail') }}" method="post">
         @csrf
         <div class="mb-4">
           <label for="name" class="block text-left p-1 my-1 font-medium">お名前<span
@@ -37,8 +38,8 @@
           <input id="name" class="w-full p-4 text-xs leading-none bg-blueGray-50 rounded outline-none border"
             type="text" placeholder="例）田中太郎" name="name" value="{{ old('name') }}">
           @if($errors->has('name'))
-      <p class="text-red-400">{{ $errors->first('name') }}</p>
-    @endif
+        <p class="text-red-400">{{ $errors->first('name') }}</p>
+      @endif
         </div>
         <div class="mb-4">
           <label for=name_kana class="block text-left p-1 my-1 font-medium">お名前（フリガナ）<span
@@ -46,8 +47,8 @@
           <input id="name_kana" class="w-full p-4 text-xs leading-none bg-blueGray-50 rounded outline-none border"
             type="text" placeholder="例）タナカタロウ" name="name_kana" value="{{ old('name_kana') }}">
           @error('name_kana')
-      <p class="text-red-400">{{ $message }}</p>
-    @enderror
+        <p class="text-red-400">{{ $message }}</p>
+      @enderror
         </div>
         <div class="mb-4">
           <label for="phone" class="block text-left p-1 my-1 font-medium">電話番号</label>

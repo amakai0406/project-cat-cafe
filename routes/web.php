@@ -1,19 +1,38 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminBlogController;
+use App\Http\Controllers\Admin\AdminContactController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\CatController;
 use App\Http\Controllers\ContactController;
+
 use App\Http\Controllers\BlogController;
+
+
+use App\Http\Controllers\FacilityController;
+
+use App\Http\Controllers\UserCatController;
+
+
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'index');
 
 //お問い合わせフォーム
+
+//contactにアクセスがあった場合、登録画面を表示
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
-Route::post('/contact', [ContactController::class, 'sendMail']);
-Route::get('/contact/complete', [ContactController::class, 'complete'])->name('contact.complete');
+//クライアントが登録画面を入力後送信した際、DBにデータを保存
+Route::post('/contact/sendMail', [ContactController::class, 'sendMail'])->name('contact.sendMail');
+//完了画面の表示
+Route::get('/contact/complete', [ContactController::class, 'complete'])->name('contacts.complete');
+
+//TOPページの設備から設備ページ
+Route::get('/facilities', [FacilityController::class, 'index'])->name('facilities.index');
+
+//TOPページねこちゃんたちからねこ一覧画面
+Route::get('/cats', [UserCatController::class, 'index'])->name('cats.index');
 
 //TOPページのブログからブログ一覧表示
 Route::get('/blogs', [BlogController::class, 'index'])->name('blogs.index');
@@ -40,10 +59,21 @@ Route::prefix(('/admin'))
             Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
             Route::post('/users', [UserController::class, 'store'])->name('users.store');
 
+
+            //お問合せ管理
+            Route::get('/contacts', [AdminContactController::class, 'index'])->name('contacts.index');
+            Route::get('/contacts/show/{id}', [AdminContactController::class, 'show'])->name('contacts.show');
+
             //猫管理
             Route::get('/cats', [CatController::class, 'index'])->name('cats.index');
             Route::get('/cats/create', [CatController::class, 'create'])->name('cats.create');
             Route::post('/cats', [CatController::class, 'store'])->name('cats.store');
+
+            //設備管理
+            Route::get('/facilities/create', [FacilityController::class, 'create'])->name('facilities.create');
+            Route::post('/facilities', [FacilityController::class, 'store'])->name('facilities.store');
+
+
 
             //ログアウト
             Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
