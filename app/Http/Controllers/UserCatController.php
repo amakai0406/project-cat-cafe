@@ -4,16 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Models\Blog;
 use Illuminate\Http\Request;
+use App\Models\Cat;
 
-class BlogController extends Controller
+class UserCatController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     */
     public function index()
     {
-        //created_atを降順にしてblogsテーブルから全レコードを取得
-        $blogs = Blog::orderBy('created_at', 'desc')->get();
+        //メソッドで'created_at'を'desc'(降順)としてcatsテーブルの全レコードを取得
+        $cats = Cat::orderBy('created_at', 'desc')->get();
 
-        //戻り値はblogs.indexページで'blogs'=>$blogs渡している
-        return view('blogs.index', compact(('blogs')));
+        //戻り値は、$catsを渡したcats.indexページ
+        //$catsを渡すことで、cats.indexページで$catsを使用することができる
+        return view('cats.index', compact('cats'));
     }
 
     /**
