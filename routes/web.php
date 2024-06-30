@@ -14,11 +14,15 @@ use App\Http\Controllers\BlogController;
 
 
 use App\Http\Controllers\FacilityController;
+<<<<<<< HEAD
+use App\Http\Controllers\FaqController;
+=======
 
 use App\Http\Controllers\UserCatController;
 
 
 
+>>>>>>> main
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'index');
@@ -35,6 +39,10 @@ Route::get('/contact/complete', [ContactController::class, 'complete'])->name('c
 //TOPページの設備から設備ページ
 Route::get('/facilities', [FacilityController::class, 'index'])->name('facilities.index');
 
+<<<<<<< HEAD
+//TOPページのよくある質問から質問ページ
+Route::get('/faqs', [FaqController::class, 'index'])->name('faqs.index');
+=======
 //TOPページねこちゃんたちからねこ一覧画面
 Route::get('/cats', [UserCatController::class, 'index'])->name('cats.index');
 
@@ -43,6 +51,7 @@ Route::get('/blogs', [BlogController::class, 'index'])->name('blogs.index');
 
 //メニュー画面の表示
 Route::get('/menus', [MenuController::class, 'index'])->name('index.menus');
+>>>>>>> main
 
 //管理画面
 Route::prefix(('/admin'))
@@ -79,6 +88,10 @@ Route::prefix(('/admin'))
             //設備管理
             Route::get('/facilities/create', [FacilityController::class, 'create'])->name('facilities.create');
             Route::post('/facilities', [FacilityController::class, 'store'])->name('facilities.store');
+
+            //質問管理
+            Route::get('/faqs/create', [FaqController::class, 'create'])->name('faqs.create');
+            Route::post('/faqs', [FaqController::class, 'store'])->name('faqs.store');
 
 
 

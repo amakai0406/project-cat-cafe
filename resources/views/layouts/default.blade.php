@@ -24,8 +24,13 @@
                     <li><a class="text-sm text-blueGray-400 hover:text-blueGray-500" href="/cats">ねこちゃんたち</a></li>
 
                     <li><a class="text-sm text-blueGray-400 hover:text-blueGray-500" href="/blogs">ブログ</a></li>
+
+
+                    <li><a class="text-sm text-blueGray-400 hover:text-blueGray-500" href="/faqs">よくあるご質問</a></li>
+
                     <li><a class="text-sm text-blueGray-400 hover:text-blueGray-500" href="/menus">メニュー</a></li>
-                    <li><a class="text-sm text-blueGray-400 hover:text-blueGray-500" href="#">よくあるご質問</a></li>
+
+
                 </ul>
                 <div>
                     <a class="mr-2 inline-block px-4 py-3 text-xs text-blue-500 hover:text-blue-600 leading-none border border-blue-200 hover:border-blue-300 rounded"
