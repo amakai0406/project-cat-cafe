@@ -20,11 +20,17 @@
             <nav class="flex items-center justify-between py-6">
                 <a class="text-3xl font-semibold leading-none" href="/">ねこカフェららべる</a>
                 <ul class="hidden lg:flex ml-12 mr-auto space-x-12">
-                    <li><a class="text-sm text-blueGray-400 hover:text-blueGray-500" href="/facilities">設備</a></li>
-                    <li><a class="text-sm text-blueGray-400 hover:text-blueGray-500" href="#">ねこちゃんたち</a></li>
+                    <li><a class="text-sm text-blueGray-400 hover:text-blueGray-500" href="#">設備</a></li>
+                    <li><a class="text-sm text-blueGray-400 hover:text-blueGray-500" href="/cats">ねこちゃんたち</a></li>
+
                     <li><a class="text-sm text-blueGray-400 hover:text-blueGray-500" href="/blogs">ブログ</a></li>
-                    <li><a class="text-sm text-blueGray-400 hover:text-blueGray-500" href="#">メニュー</a></li>
+
+
                     <li><a class="text-sm text-blueGray-400 hover:text-blueGray-500" href="/faqs">よくあるご質問</a></li>
+
+                    <li><a class="text-sm text-blueGray-400 hover:text-blueGray-500" href="/menus">メニュー</a></li>
+
+
                 </ul>
                 <div>
                     <a class="mr-2 inline-block px-4 py-3 text-xs text-blue-500 hover:text-blue-600 leading-none border border-blue-200 hover:border-blue-300 rounded"
