@@ -6,7 +6,15 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\CatController;
 use App\Http\Controllers\ContactController;
+
+use App\Http\Controllers\BlogController;
+
+
 use App\Http\Controllers\FacilityController;
+
+use App\Http\Controllers\UserCatController;
+
+
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'index');
@@ -22,6 +30,12 @@ Route::get('/contact/complete', [ContactController::class, 'complete'])->name('c
 
 //TOPページの設備から設備ページ
 Route::get('/facilities', [FacilityController::class, 'index'])->name('facilities.index');
+
+//TOPページねこちゃんたちからねこ一覧画面
+Route::get('/cats', [UserCatController::class, 'index'])->name('cats.index');
+
+//TOPページのブログからブログ一覧表示
+Route::get('/blogs', [BlogController::class, 'index'])->name('blogs.index');
 
 //管理画面
 Route::prefix(('/admin'))
