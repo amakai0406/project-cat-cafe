@@ -36,25 +36,18 @@ class UserController extends Controller
         return back()->with('success', 'ユーザを登録しました');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Request $request)
     {
         $request->session()->forget('errors');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+
     public function edit(User $user)
     {
         return view('admin/users/edit', ['user' => $user]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+
     public function update(Request $request, User $user)
     {
         $user->name = $request->input('name');
@@ -76,9 +69,7 @@ class UserController extends Controller
     }
 
 
-    /**
-     * Remove the specified resource from storage.
-     */
+
     public function destroy(User $user)
     {
         //
